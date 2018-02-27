@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<litepal>
+    <dbname value = "cMedicine"/>
+
+    <version value = "4"/>
+
+    <list>
+        <mapping class = "com.example.cmedicine.db.Initial"/>
+        <mapping class = "com.example.cmedicine.db.Medicine"/>
+        <mapping class="com.example.cmedicine.db.Search"/>
+        <mapping class="com.example.cmedicine.db.Favorites"/>
+    </list>
+
+</litepal>
