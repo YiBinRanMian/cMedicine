@@ -17,11 +17,12 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
         mBottomTabBar = (BottomTabBar) findViewById(R.id.bottom_tab_bar);
         mBottomTabBar.init(getSupportFragmentManager())
-                .setImgSize(24,24)
-                .setFontSize(1)
+                .setImgSize(40,40)
+                //.setFontSize(1)
                 .setChangeColor(Color.RED,Color.DKGRAY)
                 .addTabItem("目录", R.drawable.ic_category4, ChooseMedFragment.class)
-                .addTabItem("收藏",R.drawable.favourites1,LikeListFragment.class)
+                .addTabItem("收藏",R.drawable.ic_category4, LikeListFragment.class)
+                .addTabItem("测试", R.drawable.ic_category, TestFragment.class)
                 .setTabBarBackgroundColor(Color.WHITE)
                 .isShowDivider(false)
                 .setOnTabChangeListener(new BottomTabBar.OnTabChangeListener() {
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity{
                     public void onTabChange(int position, String name) {
 
                     }
-                })
-                ;
+                });
+
     }
 }
