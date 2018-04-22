@@ -9,6 +9,8 @@ import com.example.cmedicine.db.Initial;
 import com.example.cmedicine.db.Medicine;
 import com.example.cmedicine.db.Search;
 import com.example.cmedicine.info.Information;
+import com.example.cmedicine.info.News;
+import com.example.cmedicine.info.NewsDetail;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -22,6 +24,10 @@ import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
 import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
 import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by macbookair on 2018/2/21.
  */
@@ -104,7 +110,42 @@ public class Utility {
         return null;
 
     }
-
+    public static NewsDetail handleNewsDetailResponse(String response){
+        if(!TextUtils.isEmpty(response)){
+            try{
+                NewsDetail newsDetail = new NewsDetail();
+                Document doc = Jsoup.parse(response);
+                Element els1 = doc.select("div[id=wzdh]").first().nextElementSibling();
+                newsDetail.setTitle(els1.text());
+                Log.d("test", newsDetail.getTitle());
+                Element els2 = doc.select("div[class=webnr]").first();
+                newsDetail.setContent(els2.text());
+                return newsDetail;
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+    public static List<News> handleNewsResponse(String response){
+        List<News> newsList = new ArrayList<>();
+        if(!TextUtils.isEmpty(response)){
+            try{
+                Document doc = Jsoup.parse(response);
+                Elements els = doc.select("div[class=ullist01]").first().children().first().children();
+                for (Element element:els){
+                    News news = new News();
+                    news.setNewsName(element.text());
+                    news.setNewsId("https://www.zhzyw.com/"+element.select("a").attr("href"));
+                    newsList.add(news);
+                }
+                return newsList;
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
     /**
      * 设置Information对象的属性
      */
@@ -262,4 +303,5 @@ public class Utility {
         }
 
     }
+
 }

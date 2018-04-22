@@ -6,11 +6,11 @@
     android:background="#F1F1F1">
 
     <android.support.v4.widget.DrawerLayout
-        android:id="@+id/drawer_layout"
+        android:id="@+id/drawer1_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <ScrollView
-            android:id="@+id/medicine_layout"
+            android:id="@+id/news_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="vertical"
@@ -20,17 +20,14 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
-                <include layout="@layout/title"/>
-                <include layout="@layout/extract"/>
+                <include layout="@layout/title_news"/>
                 <include layout="@layout/detail"/>
-                <include layout="@layout/distribution"/>
-                <include layout="@layout/usage"/>
+
             </LinearLayout>
         </ScrollView>
         <fragment
-            android:id="@+id/choose_medicine_fragment"
-            android:name="com.example.cmedicine.ChooseMedFragment"
+            android:id="@+id/info_fragment"
+            android:name="com.example.cmedicine.InfoFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="start"/>

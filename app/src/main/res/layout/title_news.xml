@@ -4,7 +4,7 @@
     android:layout_height="?attr/actionBarSize">
 
     <Button
-        android:id="@+id/nav_button"
+        android:id="@+id/nav1_button"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_alignParentLeft="true"
@@ -13,7 +13,7 @@
         android:background="@drawable/ic_home" />
 
     <TextView
-        android:id="@+id/title_name"
+        android:id="@+id/news_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -25,14 +25,6 @@
         android:textStyle="bold"
         android:typeface="monospace" />
 
-    <Button
-        android:id="@+id/like_button"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/favourites" />
 
     <!--<View  android:layout_height="1px"-->
     <!--android:layout_width="match_parent"-->

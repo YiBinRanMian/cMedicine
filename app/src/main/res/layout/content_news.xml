@@ -15,24 +15,14 @@
         android:layout_height="wrap_content"
         android:layout_margin="15dp">
 
-        <TextView
-            android:id="@+id/habitat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp"
-            android:text="生境分布"
-            android:textColor="#a000"
-            android:textSize="20sp"
-            android:typeface="monospace"
-            android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/habitat_text"
+            android:id="@+id/source_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
+            android:layout_margin="10dp"
             android:textColor="#a000"
             android:typeface="monospace"/>
+
     </LinearLayout>
 </android.support.v7.widget.CardView>

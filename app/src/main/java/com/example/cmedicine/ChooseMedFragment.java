@@ -94,6 +94,7 @@ public class ChooseMedFragment extends Fragment {
                 } else if (currentLevel == LEVEL_MED) {
                     String medicineCode = medicineList.get(i).getMcode();
                     if (getActivity() instanceof MainActivity) {
+
                         Intent intent = new Intent(getActivity(), MedicineActivity.class);
                         intent.putExtra("medicine_code", medicineCode);
                         startActivity(intent);
@@ -119,12 +120,15 @@ public class ChooseMedFragment extends Fragment {
             @Override
             public boolean onQueryTextSubmit(String s) {
 
-                Intent intent = new Intent(getActivity(), MedicineActivity.class);
 
                 queryMedicineFromServer(s);
                 String mCode = queryMedicineByName(s);
                 closeProgressDialog();
                 if (mCode != null) {
+                    Log.d("test", "111");
+                    Log.d("test", mCode);
+
+                    Intent intent = new Intent(getActivity(), MedicineActivity.class);
                     intent.putExtra("medicine_code", mCode);
                     startActivity(intent);
                     getActivity().finish();
@@ -187,7 +191,7 @@ public class ChooseMedFragment extends Fragment {
      * 从服务器查询
      */
     private void queryFromServer(String address, final String type) {
-        showProgressDialog();
+
         HttpUtil.sendOkhttpRequest(address, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -259,7 +263,7 @@ public class ChooseMedFragment extends Fragment {
                 break;
             }
         }
-        if (searchList.size() > 0) {
+        if (searchList.size() > 1) {
             return String.valueOf(searchList.get(0).getCode());
         } else {
             return null;
@@ -267,6 +271,12 @@ public class ChooseMedFragment extends Fragment {
     }
 
     private void queryMedicineFromServer(final String mName) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                showProgressDialog();
+            }
+        });
         HttpUtil.sendOkhttpRequest("http://www.bencao.com.cn/zhongcaoyao/daquan/index.html", new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
