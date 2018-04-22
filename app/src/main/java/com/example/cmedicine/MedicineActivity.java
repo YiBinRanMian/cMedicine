@@ -100,7 +100,7 @@ public class MedicineActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
 //                drawerLayout.openDrawer(GravityCompat.START);
-                Intent intent = new Intent(MedicineActivity.this,MainActivity.class);
+                Intent intent = new Intent(MedicineActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });

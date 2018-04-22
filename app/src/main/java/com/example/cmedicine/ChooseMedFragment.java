@@ -255,7 +255,7 @@ public class ChooseMedFragment extends Fragment {
                 e.printStackTrace();
             }
             searchList = DataSupport.select("code").where("name = ?", String.valueOf(mName)).find(Search.class);
-            if (time > 20) {
+            if (time > 40) {
                 break;
             }
         }
