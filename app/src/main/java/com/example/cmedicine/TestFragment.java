@@ -1,5 +1,6 @@
 package com.example.cmedicine;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,7 +19,8 @@ import android.support.v4.app.Fragment;
 public class TestFragment extends Fragment {
     private static final String TAG = "TestFragment";
 
-    private Button entrytestbutton ;
+    private Button entrytestbutton;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -30,11 +32,11 @@ public class TestFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        entrytestbutton.setOnClickListener(new View.OnClickListener(){
+        entrytestbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(getActivity(), MedicineActivity.class);
+                Intent intent = new Intent(getActivity(), TestActivity.class);
                 startActivity(intent);
                 getActivity().finish();
             }
