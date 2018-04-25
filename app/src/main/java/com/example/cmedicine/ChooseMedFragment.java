@@ -94,7 +94,6 @@ public class ChooseMedFragment extends Fragment {
                 } else if (currentLevel == LEVEL_MED) {
                     String medicineCode = medicineList.get(i).getMcode();
                     if (getActivity() instanceof MainActivity) {
-
                         Intent intent = new Intent(getActivity(), MedicineActivity.class);
                         intent.putExtra("medicine_code", medicineCode);
                         startActivity(intent);
@@ -119,15 +118,10 @@ public class ChooseMedFragment extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
-
-
                 queryMedicineFromServer(s);
                 String mCode = queryMedicineByName(s);
                 closeProgressDialog();
                 if (mCode != null) {
-                    Log.d("test", "111");
-                    Log.d("test", mCode);
-
                     Intent intent = new Intent(getActivity(), MedicineActivity.class);
                     intent.putExtra("medicine_code", mCode);
                     startActivity(intent);
@@ -137,7 +131,6 @@ public class ChooseMedFragment extends Fragment {
                 }
                 return true;
             }
-
             @Override
             public boolean onQueryTextChange(String s) {
                 return true;
@@ -183,6 +176,7 @@ public class ChooseMedFragment extends Fragment {
         } else {
             int initialName = selectedInitial.getName();
             String address = "http://www.bencao.com.cn/zhongcaoyao/daquan/index.html";
+//            从服务器中查询药材
             queryFromServer(address, "medicine");
         }
     }
@@ -191,7 +185,6 @@ public class ChooseMedFragment extends Fragment {
      * 从服务器查询
      */
     private void queryFromServer(String address, final String type) {
-
         HttpUtil.sendOkhttpRequest(address, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -287,7 +280,6 @@ public class ChooseMedFragment extends Fragment {
                     }
                 });
             }
-
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 byte[] responseBytes = response.body().bytes();

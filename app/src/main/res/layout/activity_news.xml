@@ -22,7 +22,6 @@
                 android:layout_height="wrap_content">
                 <include layout="@layout/title_news"/>
                 <include layout="@layout/detail"/>
-
             </LinearLayout>
         </ScrollView>
         <fragment

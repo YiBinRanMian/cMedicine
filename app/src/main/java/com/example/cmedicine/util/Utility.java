@@ -108,8 +108,11 @@ public class Utility {
             }
         }
         return null;
-
     }
+
+    /**
+     * 解析和处理服务器返回的新闻具体信息数据
+     */
     public static NewsDetail handleNewsDetailResponse(String response){
         if(!TextUtils.isEmpty(response)){
             try{
@@ -127,6 +130,10 @@ public class Utility {
         }
         return null;
     }
+
+    /**
+     * 解析和处理服务器返回的新闻列表数据
+     */
     public static List<News> handleNewsResponse(String response){
         List<News> newsList = new ArrayList<>();
         if(!TextUtils.isEmpty(response)){
@@ -137,6 +144,7 @@ public class Utility {
                     News news = new News();
                     news.setNewsName(element.text());
                     news.setNewsId("https://www.zhzyw.com/"+element.select("a").attr("href"));
+                    Log.d("test", "handleNewsResponse: "+news.getNewsName());
                     newsList.add(news);
                 }
                 return newsList;
@@ -200,6 +208,7 @@ public class Utility {
         }
     }
 
+
     private static void UpdateInformation(Information information,String string1,String string2){
         switch (string1){
             case "名称":
@@ -251,6 +260,9 @@ public class Utility {
         }
     }
 
+    /**
+     * 通过药材名解析服务器数据并存储数据库
+     */
     public static void handleNameResponse(String response,String name){
         String code = "";
         if(!TextUtils.isEmpty(response)){
@@ -273,7 +285,9 @@ public class Utility {
             }
         }
     }
-
+    /**
+     * 返回输入药材名的首字母大写
+     */
     private static char getFirstPinyin(String name){
         String pinyinName = "";
         char[] nameChar = name.toCharArray();
@@ -292,6 +306,9 @@ public class Utility {
         return pinyinName.toUpperCase().toCharArray()[0];
     }
 
+    /**
+     * 存储收藏药材
+     */
     public static void handleFavoritesSet(String code,String name){
         Favorites favorites = new Favorites();
         if (DataSupport.where("mcode = ?",code).find(Favorites.class).size()==0){
@@ -301,7 +318,5 @@ public class Utility {
         }else {
             DataSupport.deleteAll(Favorites.class,"mcode = ?",code);
         }
-
     }
-
 }

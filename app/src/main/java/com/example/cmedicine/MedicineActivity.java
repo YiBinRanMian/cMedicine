@@ -93,13 +93,19 @@ public class MedicineActivity extends AppCompatActivity{
         Button navButton = (Button) findViewById(R.id.nav_button);
         habitatTitle = (TextView) findViewById(R.id.habitat);
         likeButton = (Button) findViewById(R.id.like_button);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String medicineCode = getIntent().getStringExtra("medicine_code");
-        medicineLayout.setVisibility(View.INVISIBLE);
-        requestInformetion(medicineCode);
+        String medicineString = prefs.getString(medicineCode,null);
+        if (medicineString!=null){
+            Information information = Utility.handleInformationResponse(medicineString);
+            showMedicineInfo(information);
+        }else{
+            medicineLayout.setVisibility(View.INVISIBLE);
+            requestInformetion(medicineCode);
+        }
         navButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                drawerLayout.openDrawer(GravityCompat.START);
                 Intent intent = new Intent(MedicineActivity.this, MainActivity.class);
                 startActivity(intent);
             }
@@ -140,9 +146,8 @@ public class MedicineActivity extends AppCompatActivity{
                     @Override
                     public void run() {
                         if (information != null){
-                            name = information.basic.name;
                             SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(MedicineActivity.this).edit();
-                            editor.putString("information",newString);
+                            editor.putString(Code,newString);
                             editor.apply();
                             showMedicineInfo(information);
                         }else {

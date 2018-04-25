@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#fff">
+    xmlns:cube_ptr="http://schemas.android.com/apk/res-auto">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -17,19 +18,54 @@
             android:layout_centerInParent="true"
             android:textSize="20sp"/>
 
-        <!--<Button-->
-            <!--android:id="@+id/back_Button"-->
-            <!--android:layout_width="25dp"-->
-            <!--android:layout_height="25dp"-->
-            <!--android:layout_marginLeft="10dp"-->
-            <!--android:layout_alignParentLeft="true"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:background="@drawable/ic_back"/>-->
-
     </RelativeLayout>
-    <ListView
-        android:id="@+id/list_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
 
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#fff">
+        <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="?attr/actionBarSize"-->
+            <!--android:background="?attr/colorPrimary">-->
+<!---->
+<!---->
+<!---->
+<!---->
+            <!--&lt;!&ndash;<Button&ndash;&gt;-->
+                <!--&lt;!&ndash;android:id="@+id/back_Button"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="25dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="25dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginLeft="10dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_alignParentLeft="true"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_centerVertical="true"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:background="@drawable/ic_back"/>&ndash;&gt;-->
+<!---->
+        <!--</RelativeLayout>-->
+        <in.srain.cube.views.ptr.PtrFrameLayout
+            android:id="@+id/ptr_frame_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+
+            cube_ptr:ptr_resistance_header="1.7"
+            cube_ptr:ptr_ratio_of_header_height_to_refresh="1.2"
+            cube_ptr:ptr_duration_to_back_header="300"
+            cube_ptr:ptr_duration_to_close_header="2000"
+            cube_ptr:ptr_keep_header_when_refresh="true"
+            cube_ptr:ptr_pull_to_fresh="false"
+
+            cube_ptr:ptr_resistance_footer="1.3"
+            cube_ptr:ptr_duration_to_back_footer="300"
+            cube_ptr:ptr_duration_to_close_footer="2000">
+            <ListView
+                android:id="@+id/list_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </in.srain.cube.views.ptr.PtrFrameLayout>
+    </LinearLayout>
+<!--</com.jwenfeng.library.pulltorefresh.PullToRefreshLayout>-->
 </LinearLayout>
