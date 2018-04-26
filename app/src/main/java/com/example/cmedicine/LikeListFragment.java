@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,13 +47,15 @@ public class LikeListFragment extends Fragment{
         likeList = (ListView) view.findViewById(R.id.like_list);
         adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, dataList);
         likeList.setAdapter(adapter);
+        Log.d("test", "onCreateView: 1");
         return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        queryFavorites();
+//        Log.d("test", "onActivityCreated: "+dataList.size());
         super.onActivityCreated(savedInstanceState);
+        queryFavorites();
         likeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -69,11 +72,15 @@ public class LikeListFragment extends Fragment{
                 }
             }
         });
+        Log.d("test", "onCreateView: 4");
+
     }
 
     private void queryFavorites(){
         favoritesList = DataSupport.findAll(Favorites.class);
         if (favoritesList.size()>0){
+            Log.d("test", "onCreateView: 5");
+
             dataList.clear();
             for (Favorites favorites:favoritesList){
                 dataList.add(favorites.getName());

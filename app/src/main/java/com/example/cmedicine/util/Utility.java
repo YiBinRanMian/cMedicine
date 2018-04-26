@@ -311,6 +311,7 @@ public class Utility {
      */
     public static void handleFavoritesSet(String code,String name){
         Favorites favorites = new Favorites();
+        Log.d("test", code + " "+ name);
         if (DataSupport.where("mcode = ?",code).find(Favorites.class).size()==0){
             favorites.setMcode(code);
             favorites.setName(name);

@@ -98,11 +98,12 @@ public class MedicineActivity extends AppCompatActivity{
         String medicineString = prefs.getString(medicineCode,null);
         if (medicineString!=null){
             Information information = Utility.handleInformationResponse(medicineString);
-            showMedicineInfo(information);
-        }else{
+            showMedicineInfo(information);}
+        else{
             medicineLayout.setVisibility(View.INVISIBLE);
             requestInformetion(medicineCode);
-        }
+            }
+
         navButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -146,6 +147,7 @@ public class MedicineActivity extends AppCompatActivity{
                     @Override
                     public void run() {
                         if (information != null){
+                            name = information.basic.name;
                             SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(MedicineActivity.this).edit();
                             editor.putString(Code,newString);
                             editor.apply();

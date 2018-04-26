@@ -78,6 +78,7 @@ public class ChooseMedFragment extends Fragment {
         searchView = (SearchView) view.findViewById(R.id.search_med);
         adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, dataList);
         listView.setAdapter(adapter);
+        Utility.initInitial();
         queryInitials();
         return view;
     }
@@ -155,6 +156,7 @@ public class ChooseMedFragment extends Fragment {
             currentLevel = LEVEL_INITIAL;
         } else {
             Utility.initInitial();
+
         }
     }
 
