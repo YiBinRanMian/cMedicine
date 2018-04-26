@@ -46,7 +46,6 @@ public class Utility {
                 initial.setName(i);
                 initial.save();
             }
-
         }
     }
 
@@ -263,7 +262,7 @@ public class Utility {
     /**
      * 通过药材名解析服务器数据并存储数据库
      */
-    public static void handleNameResponse(String response,String name){
+    public static String handleNameResponse(String response,String name){
         String code = "";
         if(!TextUtils.isEmpty(response)){
             try {
@@ -280,10 +279,12 @@ public class Utility {
                 search.setCode(code);
                 search.setName(name);
                 search.save();
+                return code;
             }catch (Exception e){
                 e.printStackTrace();
             }
         }
+        return null;
     }
     /**
      * 返回输入药材名的首字母大写
