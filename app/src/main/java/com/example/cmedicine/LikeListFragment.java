@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ import com.example.cmedicine.db.Favorites;
 
 import org.litepal.crud.DataSupport;
 
+import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +32,7 @@ public class LikeListFragment extends Fragment{
     private TextView likeText;
 
     private ListView likeList;
+
 
     private ArrayAdapter<String> adapter;
 
@@ -72,8 +75,6 @@ public class LikeListFragment extends Fragment{
                 }
             }
         });
-        Log.d("test", "onCreateView: 4");
-
     }
 
     private void queryFavorites(){

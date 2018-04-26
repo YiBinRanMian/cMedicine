@@ -68,6 +68,7 @@ public class ChooseMedFragment extends Fragment {
     private List<Search> searchList;
 
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -78,7 +79,7 @@ public class ChooseMedFragment extends Fragment {
         searchView = (SearchView) view.findViewById(R.id.search_med);
         adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, dataList);
         listView.setAdapter(adapter);
-//        Utility.initInitial();
+        if (dataList.size() == 0) Utility.initInitial();
         queryInitials();
         return view;
     }
@@ -102,6 +103,7 @@ public class ChooseMedFragment extends Fragment {
                     } else if (getActivity() instanceof MedicineActivity) {
                         MedicineActivity activity = (MedicineActivity) getActivity();
                         activity.drawerLayout.closeDrawers();
+                        Log.d("tttttt", "onItemClick: ");
                         activity.requestInformetion(medicineCode);
                     }
                 }
@@ -115,24 +117,12 @@ public class ChooseMedFragment extends Fragment {
                 }
             }
         });
-
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 showProgressDialog();
                 queryMedicineFromServer(s);
                 return true;
-//                String mCode = queryMedicineByName(s);
-//                closeProgressDialog();
-//                if (mCode != null) {
-//                    Intent intent = new Intent(getActivity(), MedicineActivity.class);
-//                    intent.putExtra("medicine_code", mCode);
-//                    startActivity(intent);
-//                    getActivity().finish();
-//                } else {
-//                    Toast.makeText(getContext(), "获取药材信息失败", Toast.LENGTH_SHORT).show();
-//                }
-//                return true;
             }
             @Override
             public boolean onQueryTextChange(String s) {
@@ -148,19 +138,13 @@ public class ChooseMedFragment extends Fragment {
         titleText.setText("通过首字母查询");
         backButton.setVisibility(View.GONE);
         initialList = DataSupport.findAll(Initial.class);
-        if (initialList.size()==0) {
-            Utility.initInitial();
+        dataList.clear();
+        for (Initial initial : initialList) {
+            dataList.add(String.valueOf(initial.getName()));
         }
-        else {
-            dataList.clear();
-            for (Initial initial : initialList) {
-                dataList.add(String.valueOf(initial.getName()));
-            }
-            adapter.notifyDataSetChanged();
-            listView.setSelection(0);
-            currentLevel = LEVEL_INITIAL;
-
-        }
+        adapter.notifyDataSetChanged();
+        listView.setSelection(0);
+        currentLevel = LEVEL_INITIAL;
     }
 
     /**
@@ -196,7 +180,7 @@ public class ChooseMedFragment extends Fragment {
     /**
      * 从服务器查询
      */
-    private void queryFromServer(String address, final String type) {
+    private void queryFromServer(String address, String type) {
         HttpUtil.sendOkhttpRequest(address, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -253,30 +237,7 @@ public class ChooseMedFragment extends Fragment {
         }
     }
 
-//    private String queryMedicineByName(String mName) {
-//        int time = 0;
-//        searchList = DataSupport.select("code").where("name = ?", String.valueOf(mName)).find(Search.class);
-//        while (searchList.size() == 0) {
-//            time++;
-//            try {
-//                Thread.sleep(300);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//            searchList = DataSupport.select("code").where("name = ?", String.valueOf(mName)).find(Search.class);
-//            if (time > 80) {
-//                break;
-//            }
-//        }
-//        if (searchList.size() > 1) {
-//            return String.valueOf(searchList.get(0).getCode());
-//        } else {
-//            return null;
-//        }
-//    }
-
-    private void queryMedicineFromServer(final String mName) {
-
+    private void queryMedicineFromServer(String mName) {
         HttpUtil.sendOkhttpRequest("http://www.bencao.com.cn/zhongcaoyao/daquan/index.html", new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -307,13 +268,6 @@ public class ChooseMedFragment extends Fragment {
 
                     }
                 });
-
-//                getActivity().runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        showProgressDialog();
-//                    }
-//                });
             }
         });
     }

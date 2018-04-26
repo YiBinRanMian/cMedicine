@@ -95,20 +95,26 @@ public class MedicineActivity extends AppCompatActivity{
         likeButton = (Button) findViewById(R.id.like_button);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String medicineCode = getIntent().getStringExtra("medicine_code");
-        String medicineString = prefs.getString(medicineCode,null);
-        if (medicineString!=null){
-            Information information = Utility.handleInformationResponse(medicineString);
-            showMedicineInfo(information);}
-        else{
-            medicineLayout.setVisibility(View.INVISIBLE);
-            requestInformetion(medicineCode);
+        if(medicineCode.length()>1){
+            String medicineString = prefs.getString(medicineCode,null);
+            if (medicineString!=null){
+                Information information = Utility.handleInformationResponse(medicineString);
+                assert information != null;
+                code = medicineCode;
+                name = information.basic.name;
+                showMedicineInfo(information);
             }
-
+            else{
+                medicineLayout.setVisibility(View.INVISIBLE);
+                requestInformetion(medicineCode);
+            }
+        }
         navButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MedicineActivity.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         likeButton.setOnClickListener(new View.OnClickListener() {
@@ -127,7 +133,7 @@ public class MedicineActivity extends AppCompatActivity{
     public void requestInformetion(String Code){
         code = Code;
         setIcon(Code);
-        final String infoUrl = "http://www.bencao.com.cn/zhongcaoyao/html/"+Code+".html";
+        String infoUrl = "http://www.bencao.com.cn/zhongcaoyao/html/"+Code+".html";
         HttpUtil.sendOkhttpRequest(infoUrl, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -159,12 +165,15 @@ public class MedicineActivity extends AppCompatActivity{
                 });
             }
         });
+
+
     }
 
     /*
      *显示药材信息
      */
     private void showMedicineInfo(Information information){
+        setIcon(code);
         String medName = information.basic.name;
         setInfoText(titleMedicine,medName);
         String extract = "摘录: " + information.basic.extract;

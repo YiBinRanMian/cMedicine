@@ -40,13 +40,17 @@ public class Utility {
      * 初始化首字母
      */
     public static void initInitial(){
-        for (char i = 'A'; i <= 'Z'; i++) {
-            if (i != 'V' && i != 'I' && i != 'O' && i != 'U'){
-                Initial initial = new Initial();
-                initial.setName(i);
-                initial.save();
-            }
-        }
+        List<Initial> initialList;
+        initialList = DataSupport.findAll(Initial.class);
+        if (initialList.size() == 0)
+            for (char i = 'A'; i <= 'Z'; i++)
+                if (i != 'V' && i != 'I' && i != 'O' && i != 'U'){
+                    Initial initial = new Initial();
+                    initial.setName(i);
+                    initial.save();
+                }
+
+
     }
 
     /**
@@ -312,7 +316,6 @@ public class Utility {
      */
     public static void handleFavoritesSet(String code,String name){
         Favorites favorites = new Favorites();
-        Log.d("test", code + " "+ name);
         if (DataSupport.where("mcode = ?",code).find(Favorites.class).size()==0){
             favorites.setMcode(code);
             favorites.setName(name);

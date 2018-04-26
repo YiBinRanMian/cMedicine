@@ -187,6 +187,8 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(TestActivity.this,MainActivity.class);
+                startActivity(intent);
                 finish();
             }
         });
